@@ -4,18 +4,41 @@ orbs:
   python: circleci/python@0.2.1
 
 jobs:
-  build-and-push:
+  build:
+    environment:
+        IMAGE_NAME: m1finance/hello-python
     executor: python/default
     steps:
       - checkout
       - python/load-cache
       - python/install-deps
       - python/save-cache
+      - setup_remote_docker
       - run:
-          command: ./run.sh
-          name: Build
-
+          name: Build Docker image
+          command: docker build -t $IMAGE_NAME:latest .
+  publish-latest:
+    environment:
+          IMAGE_NAME: hello-python
+    steps:
+      - run:
+          name: Publish Docker Image to Docker Hub
+          command: |
+            echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+            docker push $IMAGE_NAME:latest
 workflows:
-  main:
-    jobs:
-      - build-and-push
+  version: 2
+    build-master:
+      jobs:
+        - build:
+            filters:
+              branches:
+                only:
+                  - master
+                  - /.*/
+        - publish-latest:
+            requires:
+              - build
+            filters:
+              branches:
+                only: master
