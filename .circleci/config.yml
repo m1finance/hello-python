@@ -20,6 +20,7 @@ jobs:
   publish-latest:
     environment:
       IMAGE_NAME: hello-python
+    executor: python/default
     steps:
       - run:
           name: Publish Docker Image to Docker Hub
@@ -29,6 +30,7 @@ jobs:
   publish-branch:
     environment:
       IMAGE_NAME: hello-python
+    executor: python/default
     steps:
       - run:
           name: Publish Docker Image to Docker Hub
