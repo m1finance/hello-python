@@ -6,7 +6,7 @@ orbs:
 jobs:
   build:
     environment:
-        IMAGE_NAME: m1finance/hello-python
+      IMAGE_NAME: m1finance/hello-python
     executor: python/default
     steps:
       - checkout
@@ -19,7 +19,7 @@ jobs:
           command: docker build -t $IMAGE_NAME:latest .
   publish-latest:
     environment:
-          IMAGE_NAME: hello-python
+      IMAGE_NAME: hello-python
     steps:
       - run:
           name: Publish Docker Image to Docker Hub
@@ -28,7 +28,7 @@ jobs:
             docker push $IMAGE_NAME:latest
   publish-branch:
     environment:
-          IMAGE_NAME: hello-python
+      IMAGE_NAME: hello-python
     steps:
       - run:
           name: Publish Docker Image to Docker Hub
