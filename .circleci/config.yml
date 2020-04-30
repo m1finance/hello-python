@@ -34,7 +34,7 @@ jobs:
           aws-secret-access-key: SECRET_ACCESS_KEY_ENV_VAR_NAME
       - aws-ecr/ecr-login
       - aws-ecr/push-image:
-          account-url: ${AWS_ACCOUNT_ID}.dkr.ecr.us-east-1.amazonaws.com
+          account-url: $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com
           tag: $IMAGE_NAME:$CIRCLE_BRANCH$CIRCLE_BUILD_NUM, $IMAGE_NAME:latest
   publish-latest-dh:
     environment:
