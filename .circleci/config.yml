@@ -35,6 +35,7 @@ jobs:
       - aws-ecr/ecr-login
       - aws-ecr/push-image:
           account-url: ECR_ACCOUNT_URL
+          repo: $IMAGE_NAME
           tag: $IMAGE_NAME:$CIRCLE_BRANCH$CIRCLE_BUILD_NUM, $IMAGE_NAME:latest
   publish-latest-dh:
     environment:
