@@ -9,6 +9,7 @@ jobs:
   publish-latest-ecr:
     environment:
       IMAGE_NAME: hello-python
+      AWS_REGION: us-east-1
     executor: python/default
     steps:
       - checkout
