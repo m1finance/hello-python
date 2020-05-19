@@ -11,7 +11,7 @@ jobs:
     environment:
       IMAGE_NAME: hello-python
       AWS_REGION: us-east-1
-      VERSION: 0.0.3-pre
+      VERSION: 0.0.3-develop
     executor: python/default
     steps:
       - checkout
@@ -24,7 +24,7 @@ jobs:
           account-url: ECR_ACCOUNT_URL
           repo: $IMAGE_NAME
           create-repo: true
-          tag: $CIRCLE_BRANCH$CIRCLE_BUILD_NUM,latest,$VERSION.$CIRCLE_SHA1
+          tag: $CIRCLE_BRANCH$CIRCLE_BUILD_NUM,latest,$VERSION-$CIRCLE_SHA1
           aws-access-key-id: ACCESS_KEY_ID_ENV_VAR_NAME
           aws-secret-access-key: SECRET_ACCESS_KEY_ENV_VAR_NAME
       - run:
