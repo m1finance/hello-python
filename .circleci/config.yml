@@ -10,7 +10,7 @@ jobs:
     environment:
       IMAGE_NAME: hello-python
       AWS_REGION: us-east-1
-      VERSION: 0.0.3-pre+
+      VERSION: 0.0.3-pre
     executor: python/default
     steps:
       - checkout
