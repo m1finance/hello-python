@@ -8,4 +8,4 @@ CUR_CHART_VERSION=$(cat chart/Chart.yaml | grep "version:" | awk -F ': ' '{ prin
 CHART_VERSION="$VERSION-$CIRCLE_SHA1"
 sed -i 's/'$CUR_CHART_VERSION'/'$CHART_VERSION'/g' chart/Chart.yaml
 tar -czvf ./chart.tgz ./chart
-aws s3 cp ./chart.tgz s3://m1-develop-chart-museum/hello-python/${DOCKER_TAG}-chart.tgz
+aws s3 cp ./chart.tgz s3://m1-develop-chart-museum/hello-python/${CHART_VERSION}-chart.tgz
