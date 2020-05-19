@@ -4,6 +4,7 @@ orbs:
   python: circleci/python@0.2.1
   aws-ecr: circleci/aws-ecr@6.8.2
   aws-cli: circleci/aws-cli@1.0.0
+  helm: circleci/helm@0.2.3
 
 jobs:
   publish-latest-ecr:
@@ -18,6 +19,7 @@ jobs:
       - python/install-deps
       - python/save-cache
       - setup_remote_docker
+      - install-helm-client
       - aws-ecr/build-and-push-image:
           account-url: ECR_ACCOUNT_URL
           repo: $IMAGE_NAME
