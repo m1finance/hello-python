@@ -47,7 +47,7 @@ jobs:
             git config user.email "devops@m1finance.com"
             git config user.name "m1devops"
             git add .
-            git commit --allow-empty -m "hello-python HelmRelease update"
+            git commit --allow-empty -m "hello-python HelmRelease update $VERSION-$CIRCLE_BUILD_NUM-$CIRCLE_SHA1"
             # Push quietly to prevent showing the token in log
             git push -q
   publish-latest-dh:
