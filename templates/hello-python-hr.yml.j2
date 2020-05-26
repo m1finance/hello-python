@@ -1,0 +1,17 @@
+---
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: {{ helm.name }}
+  namespace: {{ helm.namespace }}
+spec:
+  releaseName: {{ helm.release_name }}
+  values:
+    image:
+      #repository: required as flux does not know about the helm chart itself. @hidde https://cloud-native.slack.com/archives/CLAJ40HV3/p1588266404020600
+      repository: 864067172311.dkr.ecr.us-east-1.amazonaws.com/hello-python
+      tag: {{ image.tag }}
+  chart:
+    repository: http://chart-museum-chartmuseum.flux.svc.cluster.m1finance.develop:8080/
+    name: hello-python-chart
+    version: {{ chart.version }}

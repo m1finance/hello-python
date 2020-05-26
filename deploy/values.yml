@@ -1,0 +1,8 @@
+helm:
+  name: hello-python
+  namespace: demo
+  release_name: hello-python
+image:
+  tag: inject_me_during_build
+chart:
+  version: inject_me_during_build

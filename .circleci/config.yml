@@ -30,6 +30,26 @@ jobs:
       - run:
           name: Publish chart
           command: ./deploy/publish_chart.sh
+      - run:
+          name: Clone Flux repo
+          working_directory: ~/workdir
+          command: |
+            git clone git@github.com:m1finance/infra-flux-eks.git
+      - run:
+          name: Render HelmRelease Template
+          working_directory: ~/workdir
+          command: |
+            ./deploy/render_template.py > infra-flux-eks/environments/develop/demo/hello-python/hello-python.yaml
+      - deploy:
+          name: Update 
+          working_directory: ~/workdir/infra-flux-eks
+          command: |
+            git config credential.helper 'cache --timeout=120'
+            git config user.email "devops@m1finance.com"
+            git config user.name "m1devops"
+            git commit --allow-empty -m "Flux Push latest image/chart tag"
+            # Push quietly to prevent showing the token in log
+            git push -q
   publish-latest-dh:
     environment:
       IMAGE_NAME: hello-python
